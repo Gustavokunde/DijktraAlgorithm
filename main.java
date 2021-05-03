@@ -9,20 +9,20 @@ public class main {
     private static final int Cassino = 4;
     private static final int Santana_Livramento = 5;
 
-    private static int readStation(String type, Scanner in) {
+    private static int LeEntradaUsuario(String type, Scanner in) {
         while (true) {
             System.out.println(type + ":");
-            String line = in.nextLine().trim();
-            if (line.isEmpty()) {
+            String linha = in.nextLine().trim();
+            if (linha.isEmpty()) {
                 System.out.println("Bye bye!");
                 System.exit(0);
             }
             try {
-                int station = Integer.parseInt(line);
-                if (station >= 1 && station <= 20) return station-1;
+                int parada = Integer.parseInt(linha);
+                if (parada >= 1 && parada <= 20) return parada-1;
             } catch (NumberFormatException e) {
             }
-            System.out.println("Invalid station! Try again.");
+            System.out.println(" Valor inválido, tente novamente");
         }
     }
 
@@ -31,72 +31,90 @@ public class main {
         // Create the Graphland Subway System
         // (see subwaySystem.pdf file in extra folder)
         //--------------------------------------------
-        Graph subway = new Graph(20);
+        Graph percurso = new Graph(20);
 
         //PRIMEIRA LINHA
-        subway.makeEdge(Porto_Alegre, Porto_Alegre, 0);
-        subway.makeEdge(Porto_Alegre, Erechim, 370);
-        subway.makeEdge(Porto_Alegre, Passo_Fundo, 280);
-        subway.makeEdge(Porto_Alegre, Vacaria, 240);
-        subway.makeEdge(Porto_Alegre, Cassino, 320);
-        subway.makeEdge(Porto_Alegre, Santana_Livramento, 490);
+        percurso.constroiMatriz(Porto_Alegre, Porto_Alegre, 0);
+        percurso.constroiMatriz(Porto_Alegre, Erechim, 370);
+        percurso.constroiMatriz(Porto_Alegre, Passo_Fundo, 280);
+        percurso.constroiMatriz(Porto_Alegre, Vacaria, 240);
+        percurso.constroiMatriz(Porto_Alegre, Cassino, 320);
+        percurso.constroiMatriz(Porto_Alegre, Santana_Livramento, 490);
 
         //SEGUNDA LINHA
-        subway.makeEdge(Erechim, Porto_Alegre, 370);
-        subway.makeEdge(Erechim, Erechim, 0);
-        subway.makeEdge(Erechim, Passo_Fundo, 80);
-        subway.makeEdge(Erechim, Vacaria, 210);
-        subway.makeEdge(Erechim, Cassino, 635);
-        subway.makeEdge(Erechim, Santana_Livramento, 600);
+        percurso.constroiMatriz(Erechim, Porto_Alegre, 370);
+        percurso.constroiMatriz(Erechim, Erechim, 0);
+        percurso.constroiMatriz(Erechim, Passo_Fundo, 80);
+        percurso.constroiMatriz(Erechim, Vacaria, 210);
+        percurso.constroiMatriz(Erechim, Cassino, 635);
+        percurso.constroiMatriz(Erechim, Santana_Livramento, 600);
 
         //TERCEIRA LINHA
-        subway.makeEdge(Passo_Fundo, Porto_Alegre, 280);
-        subway.makeEdge(Passo_Fundo, Erechim, 80);
-        subway.makeEdge(Passo_Fundo, Passo_Fundo, 0);
-        subway.makeEdge(Passo_Fundo, Vacaria, 175);
-        subway.makeEdge(Passo_Fundo, Cassino, 550);
-        subway.makeEdge(Passo_Fundo, Santana_Livramento, 700);
+        percurso.constroiMatriz(Passo_Fundo, Porto_Alegre, 280);
+        percurso.constroiMatriz(Passo_Fundo, Erechim, 80);
+        percurso.constroiMatriz(Passo_Fundo, Passo_Fundo, 0);
+        percurso.constroiMatriz(Passo_Fundo, Vacaria, 175);
+        percurso.constroiMatriz(Passo_Fundo, Cassino, 550);
+        percurso.constroiMatriz(Passo_Fundo, Santana_Livramento, 700);
 
         //QUARTA LINHA
-        subway.makeEdge(Vacaria, Porto_Alegre, 240);
-        subway.makeEdge(Vacaria, Erechim, 210);
-        subway.makeEdge(Vacaria, Passo_Fundo, 175);
-        subway.makeEdge(Vacaria, Vacaria, 0);
-        subway.makeEdge(Vacaria, Cassino, 550);
-        subway.makeEdge(Vacaria, Santana_Livramento, 700);
+        percurso.constroiMatriz(Vacaria, Porto_Alegre, 240);
+        percurso.constroiMatriz(Vacaria, Erechim, 210);
+        percurso.constroiMatriz(Vacaria, Passo_Fundo, 175);
+        percurso.constroiMatriz(Vacaria, Vacaria, 0);
+        percurso.constroiMatriz(Vacaria, Cassino, 550);
+        percurso.constroiMatriz(Vacaria, Santana_Livramento, 700);
 
         //QUINTA LINHA
-        subway.makeEdge(Cassino, Porto_Alegre, 320);
-        subway.makeEdge(Cassino, Erechim, 635);
-        subway.makeEdge(Cassino, Passo_Fundo, 550);
-        subway.makeEdge(Cassino, Vacaria, 550);
-        subway.makeEdge(Cassino, Cassino, 0);
-        subway.makeEdge(Cassino, Santana_Livramento, 405);
+        percurso.constroiMatriz(Cassino, Porto_Alegre, 320);
+        percurso.constroiMatriz(Cassino, Erechim, 635);
+        percurso.constroiMatriz(Cassino, Passo_Fundo, 550);
+        percurso.constroiMatriz(Cassino, Vacaria, 550);
+        percurso.constroiMatriz(Cassino, Cassino, 0);
+        percurso.constroiMatriz(Cassino, Santana_Livramento, 405);
 
         //SEXTA LINHA
-        subway.makeEdge(Santana_Livramento, Porto_Alegre, 490);
-        subway.makeEdge(Santana_Livramento, Erechim, 600);
-        subway.makeEdge(Santana_Livramento, Passo_Fundo, 520);
-        subway.makeEdge(Santana_Livramento, Vacaria, 700);
-        subway.makeEdge(Santana_Livramento, Cassino, 404);
-        subway.makeEdge(Santana_Livramento, Santana_Livramento, 0);
+        percurso.constroiMatriz(Santana_Livramento, Porto_Alegre, 490);
+        percurso.constroiMatriz(Santana_Livramento, Erechim, 600);
+        percurso.constroiMatriz(Santana_Livramento, Passo_Fundo, 520);
+        percurso.constroiMatriz(Santana_Livramento, Vacaria, 700);
+        percurso.constroiMatriz(Santana_Livramento, Cassino, 404);
+        percurso.constroiMatriz(Santana_Livramento, Santana_Livramento, 0);
 
-        //Graphland Subway Terminal
         //-------------------------
         Scanner in = new Scanner(System.in);
-        System.out.println("Welcome to Graphland Subway System!");
-        System.out.println("   built by Mayor Vinicius Godoy de Mendonca");
-        System.out.println("   responsible engineer Henri Frederico Eberspacher");
-        System.out.println("-------------------------------------------------------");
+
 
         while (true) {
-            System.out.println("Please, enter your desired route. Leave the field blank to exit.");
-            int source = readStation("Source", in);
-            int destination = readStation("Destination", in);
+            System.out.println("Por favor, digite os campos solicitados. Deixe em branco para sair");
+            int origem = LeEntradaUsuario("Origem", in);
+            int destino = LeEntradaUsuario("Destino", in);
 
-            System.out.println("Fastest route:");
-            for (Integer station : subway.path(source, destination)) {
-                System.out.print((station+1) + " -> ");
+            System.out.println("percurso mais rapido :");
+            for (Integer parada : percurso.caminho(origem, destino)) {
+              String caminho= "";
+              switch(parada+1){
+                case 1:
+                  caminho = "Porto Alegre";
+                break;
+                case 2:
+                  caminho = "Erechim";
+                break;
+                case 3:
+                  caminho = "Passo_Fundo";
+                break;
+                case 4:
+                  caminho = "Vacaria";
+                break;
+                case 5:
+                  caminho = "Cassino";
+                break;
+                case 6:
+                  caminho = "Santana do Livramento";
+                break;
+
+              }
+                System.out.print((caminho) + " -> ");
             }
             System.out.println("EXIT");
         }
