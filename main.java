@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class main {
-    private static final int inicial = 0;
     private static final int Porto_Alegre = 1;
     private static final int Erechim = 2;
     private static final int Passo_Fundo = 3;
