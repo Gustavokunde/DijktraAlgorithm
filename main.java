@@ -1,5 +1,3 @@
-import java.util.*;
-
 import java.util.Scanner;
 
 public class main {
@@ -32,8 +30,6 @@ public class main {
 
     public static void main(String[] args) {
       
-        
-
         //PRIMEIRA LINHA
         constroiMatriz(Porto_Alegre, Porto_Alegre, 0);
         constroiMatriz(Porto_Alegre, Erechim, 370);
@@ -149,8 +145,8 @@ public class main {
       
       int custo[] = new int[vertices.length];
       int anterior[] = new int[vertices.length];
-      Set<Integer> naoVisitados = new HashSet<>();
-
+      int naoVisitados[] = new int[vertices.length];
+      int posicaoNaoVisitados = 0;
       custo[origem] = 0;
 
       for (int v = 0; v < vertices.length; v++) {
@@ -158,13 +154,19 @@ public class main {
               custo[v] = Integer.MAX_VALUE;
           }
           anterior[v] = UNDEFINED;
-          naoVisitados.add(v);
+
+          naoVisitados[posicaoNaoVisitados]=v;
+          posicaoNaoVisitados++;
       }
 
       
-      while (!naoVisitados.isEmpty()) {
+      while (!arrayEstaLimpo(naoVisitados)) {
           int proximo = maisProximo(custo, naoVisitados);
-          naoVisitados.remove(proximo);
+
+          for(int i = 0; i< naoVisitados.length; i++){
+            if(naoVisitados[i]==proximo)
+            naoVisitados[i] = 0;
+          }
 
           for (Integer vizinho : pegaVizinhos(proximo)) {
               int custoTotal = custo[proximo] + vertices[proximo][vizinho];
@@ -182,7 +184,7 @@ public class main {
   }
 
 
-    private static int maisProximo(int[] dist, Set<Integer> naoVisitados) {
+    private static int maisProximo(int[] dist, int[] naoVisitados) {
       double minDist = Integer.MAX_VALUE;
       int minIndex = 0;
       for (Integer i : naoVisitados) {
@@ -214,5 +216,12 @@ public class main {
             caminho[ i ] = aux;
         }
       return caminho;
-  }
+    }
+
+    private static boolean arrayEstaLimpo(int[] array){
+      for(int i = 0; i < array.length; i++){
+        if(array[i]!=0) return false;
+      }
+      return true;
+    }
 }
