@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class main {
+    private static final int inicial = 0;
     private static final int Porto_Alegre = 1;
     private static final int Erechim = 2;
     private static final int Passo_Fundo = 3;
@@ -8,7 +9,7 @@ public class main {
     private static final int Cassino = 5;
     private static final int Santana_Livramento = 6;
     private static final int UNDEFINED = -1;
-    public static int vertices[][] = new int[7][7];
+    public static int vertices[][] = new int[8][8];
 
     private static int LeEntradaUsuario(String type, Scanner in) {
         while (true) {
@@ -29,8 +30,8 @@ public class main {
 
 
     public static void main(String[] args) {
-      
-        //PRIMEIRA LINHA
+       
+        // //PRIMEIRA LINHA
         constroiMatriz(Porto_Alegre, Porto_Alegre, 0);
         constroiMatriz(Porto_Alegre, Erechim, 370);
         constroiMatriz(Porto_Alegre, Passo_Fundo, 280);
@@ -88,13 +89,13 @@ public class main {
             int destino = LeEntradaUsuario("Destino", in);
 
             System.out.println("percurso mais rapido :");
-            int data[] = caminho(origem, destino);
+            int data[] = caminho(origem+1, destino+1);
             for (int i=0; i < data.length; i++) {
               int parada =  data[i];
               String caminho= "";
               if(parada != -1){
 
-                switch(parada+1){
+                switch(parada){
                   case 1:
                   caminho = "Porto Alegre";
                   break;
