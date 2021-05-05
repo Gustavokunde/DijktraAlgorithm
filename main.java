@@ -18,11 +18,8 @@ public class main {
                 System.out.println("Até mais!");
                 System.exit(0);
             }
-            try {
                 int parada = Integer.parseInt(linha);
                 if (parada <=7 ) return parada-1;
-            } catch (NumberFormatException e) {
-            }
             System.out.println(" Valor inválido, tente novamente");
         }
     }
@@ -86,10 +83,18 @@ public class main {
             System.out.println("Por favor, digite os campos solicitados. Deixe em branco para sair");
             int origem = LeEntradaUsuario("Origem", in);
             int destino = LeEntradaUsuario("Destino", in);
-
+            System.out.println("Digite o valor da gasolina: " );
+            String linha = in.nextLine().trim();
+            double valorGasolina = Double.parseDouble(linha);
+            int destinoAux = 0;
+            int origemAux = 0;          
+            int totalGasto = 0;
             System.out.println("percurso mais rapido :");
             int data[] = caminho(origem+1, destino+1);
+
             for (int i=0; i < data.length; i++) {
+              
+
               int parada =  data[i];
               String caminho= "";
               if(parada != -1){
@@ -116,9 +121,19 @@ public class main {
                   
                 }
                 System.out.print((caminho) + " -> ");
+                
+                destinoAux = origemAux;
+                origemAux = parada; 
+                
+                if(destinoAux !=0 ){
+                  if(origemAux !=0){
+                    totalGasto += vertices[origemAux][destinoAux];
+                  }
+                }
               }
             }
             System.out.println("Chegada");
+            System.out.println("Total gasto " + totalGasto*valorGasolina + " reais");
         }
     }
 
